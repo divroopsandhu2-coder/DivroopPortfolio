@@ -16,7 +16,8 @@ function figmaAssetResolver() {
   }
 }
 
-export default defineConfig({
+export default defineConfig({ 
+  base :"/DivroopPortfolio/",
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if
