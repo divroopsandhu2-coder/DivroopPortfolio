@@ -13,7 +13,8 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
-import resumeImage from "@/imports/image-1.png";
+import aboutimage from "@/imports/aboutimage.jpg";
+import homeImage from "@/imports/homeimage.jpg";
 
 /* ─────────────────────── DATA */
 
@@ -41,44 +42,48 @@ const SKILLS = [
 const EXPERIENCE = [
   {
     number: "01",
-    company: "Redtie Startup",
+    company: "Radius Security ",
     role: "Software Developer",
     location: "Richmond, BC",
     type: "Contract",
     bullets: [
-      "Upgraded a Node.js REST API by building a React web interface for an IoT device (DIBee), backed by a Flask server.",
-      "Facilitated smooth IoT communication between a Raspberry Pi and DIBee for reliable data exchange and storage.",
-      "Implemented session-based authentication and role-based access control to ensure secure user login.",
-      "Built user-friendly React-Bootstrap interfaces with full type validation, form validation, and state management.",
+      "Upgraded a Node-RED UI by developing a React web interface for IoT device (Debian), supported by a Flask backend .",
+      "Enabled real-time monitoring and control of connected peripherals like AC, fans, relays, and temperature sensors through a secure web application.",
+      "Developed RESTful APIs to ensure smooth communication between frontend and backend for device data exchange and control.",
+      " Implemented session-based authentication and role-based access control to ensure secure login.",
+      "Created a responsive and user-friendly UI using React-Bootstrap, with state updates, dynamic form validation, and intuitive controls. ",
     ],
     tags: ["React.js", "Node.js", "Flask", "Raspberry Pi", "REST API"],
   },
   {
     number: "02",
-    company: "Cosmos Technology Consulting Ltd.",
+    company: "Coocio Technology Consulting Ltd.  ",
     role: "Software Developer",
     location: "Vancouver, BC",
     type: "Contract",
     bullets: [
-      "Developed a gamified, stage-based business app for a real estate client using Microsoft Power Apps to automate lead management.",
-      "Built an automated Power Automate workflow with 13 input steps, 14 stage steps, and a role/department approval matrix.",
-      "Created SharePoint lists to manage data, integrated Power Apps with SharePoint, and administered 4+ user roles.",
-      "Automated document workflows including notifications, folder access control, and form-based template generation.",
+      "Developed a guided, stage-based business application for a Real Estate Client using Microsoft Power Apps to automate and streamline the end-to-end business case process. ",
+      "Used SharePoint Lists to maintain a database of business case entries, map department codes, track project IDs, define UI input data, log user decisions, and manage approval matrix based on stages, tiers, and departments. ",
+      "Utilized SharePoint to manage template libraries and business case documents, enabled metadata-driven upload and linking in the UI, and implemented role-based user access control. ",
+      "Automated document workflows using Power Automate, handling folder setup, access control, and tier-based template creation. ",
+      "Implemented workflow for scheduled and hierarchy-based emails triggered by stage, tier, and decision logic. ",
     ],
     tags: ["Power Apps", "Power Automate", "SharePoint", "Power BI"],
   },
   {
     number: "03",
-    company: "Complete Pool Control",
+    company: "Complete Pest Control",
     role: "Software Developer Intern",
     location: "Surrey, BC",
     type: "Internship",
     bullets: [
-      "Cleaned and reorganized inconsistent data from multiple Excel workbooks to produce a structured, analysis-ready dataset.",
-      "Proposed and designed a new relational database schema for efficient storage of the structured data.",
-      "Wrote comprehensive SQL queries to extract and transform unstructured records into the new schema.",
+      "Developed custom web scraping scripts to extract invoice data from a website lacking bulk download functionality. ",
+      " Cleaned and organized inconsistent invoice data based on client-defined categories such as Invoice number, description, units etc. using Python and Excel. ",
+      "Matched and merged invoice data with insecticide dataset to create a unified, comprehensive dataset for analysis. ",
+      "Automated filling of audit-related PDF forms using cleaned data, minimizing manual input and increasing efficiency. ",
+      "Developed a user-friendly, no-cost UI application using Google AppSheet to standardize data entry and streamline data collection for future site visits.",
     ],
-    tags: ["SQL", "MySQL", "Excel", "Data Modeling"],
+    tags: ["Python", "Web Scraping", "Excel", "Google AppSheet"],
   },
 ];
 
@@ -297,21 +302,27 @@ export default function App() {
                 className="font-black uppercase leading-none mb-2"
                 style={{
                   fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: "clamp(3.5rem, 11vw, 9rem)",
-                  lineHeight: 0.88,
+                  fontSize: "clamp(2.2rem, 6vw, 5rem)",
+                  lineHeight: 0.9,
                   letterSpacing: "-0.01em",
                 }}
               >
-                Full-Stack
-                <br />
-                <span style={{ color: "var(--primary)" }}>Developer</span>
-              </h1>
+                Hi, I'm
+              <br />
+            <span style={{ color: "var(--primary)" }}>Divroop Sandhu</span>
+           <br />
+             <span style={{ fontSize: "0.25em", fontWeight: 500, color: "#a0a0a0", letterSpacing: "0.1em", }}>
+              FULL STACK DEVELOPER
+           </span>
+            </h1>
 
               <p className="text-foreground/50 mt-5 text-sm leading-relaxed max-w-md">
-                Computer Science graduate from Punjab Technical University. I build React web interfaces, Node.js / Flask backends, and Microsoft Power Platform automations.
+               I build modern, responsive web applications that combine intuitive user experiences with reliable backend systems. Passionate about solving real-world problems through technology, I enjoy turning ideas into scalable digital solutions.
+<br/>
+Explore my projects, experience, and the technologies I use to create impactful web experiences.
               </p>
 
-              <div className="mt-8 flex items-center gap-4 flex-wrap">
+              <div className="mt-6 flex items-center gap-4 flex-wrap">
                 <button
                   onClick={() => scrollTo("Contact")}
                   className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 font-semibold hover:opacity-90 transition-opacity"
@@ -328,29 +339,10 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="mt-8 flex items-center gap-6">
-                {[
-                  { icon: Github, label: "GitHub", href: "https://github.com" },
-                  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
-                  { icon: Mail, label: "Email", href: "mailto:hello@example.dev" },
-                ].map(({ icon: Icon, label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
-                    style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.06em" }}
-                  >
-                    <Icon size={13} />
-                    {label}
-                  </a>
-                ))}
-              </div>
             </div>
 
             {/* Stats panel */}
-            <div className="hidden md:flex flex-col gap-0 w-[38%] self-stretch justify-end pb-1">
+            {/* <div className="hidden md:flex flex-col gap-0 w-[38%] self-stretch justify-end pb-1">
               {[
                 { value: "3", label: "Professional contracts" },
                 { value: "10+", label: "Technologies used" },
@@ -371,12 +363,68 @@ export default function App() {
                   </p>
                 </div>
               ))}
-            </div>
+            </div> */}
+
+<div className="hidden md:flex w-[38%] self-stretch items-center justify-center relative">
+  <div className="relative w-full max-w-[500px] aspect-square">
+    {/* Soft color glow/reflection behind everything */}
+    <div
+      className="absolute inset-0 rounded-full blur-3xl opacity-30 scale-120"
+      style={{ backgroundColor: "var(--primary)" }}
+    />
+
+    {/* Contrast circular background — offset lower/behind */}
+    <div
+      className="absolute inset-0 rounded-full translate-y-8 translate-x-5"
+      style={{ backgroundColor: "var(--primary)" }}
+    />
+
+    {/* Image — sits on top */}
+    <img
+      src={homeImage}
+      alt="Divroop Sandhu"
+      className="absolute inset-0 w-full h-full object-cover rounded-full"
+    />
+
+    {/* Floating tech badges */}
+    <div
+      className="absolute -top-1 -left-2 flex items-center gap-1.5 bg-background border border-border px-3 py-1.5 shadow-lg animate-float-1"
+      style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.04em" }}
+    >
+      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+     SEO Optimized
+    </div>
+
+    <div
+      className="absolute top-1/4 -right-8 flex items-center gap-1.5 bg-background border border-border px-3 py-1.5 shadow-lg animate-float-2"
+      style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.04em" }}
+    >
+      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+      Problem Solver
+    </div>
+
+    <div
+      className="absolute bottom-2 -left-10 flex items-center gap-1.5 bg-background border border-border px-3 py-1.5 shadow-lg animate-float-3"
+      style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.04em" }}
+    >
+      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+     Tech Enthusiast
+    </div>
+
+    <div
+      className="absolute -bottom-4 right-2 flex items-center gap-1.5 bg-background border border-border px-3 py-1.5 shadow-lg animate-float-2"
+      style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.04em" }}
+    >
+      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+      Responsive Design
+    </div>
+  </div>
+</div>
           </div>
 
           <button
             onClick={() => scrollTo("About")}
-            className="mt-14 flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors w-fit"
+            className="mt-10 flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors w-fit"
             style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.08em" }}
           >
             <ChevronDown size={13} className="animate-bounce" />
@@ -521,23 +569,35 @@ export default function App() {
 
             {/* Right — programming image */}
             <div className="relative lg:sticky lg:top-20">
-              <div className="relative overflow-hidden border border-border" style={{ aspectRatio: "4/3" }}>
+                <div  className="absolute inset-0 rounded-full blur-3xl opacity-30 scale-110" style={{ backgroundColor: "var(--primary)" }}/>
+              <div className="relative overflow-hidden border border-border rounded-2xl" style={{ aspectRatio: "4/3" }}>
+              <div className="relative w-full h-full">
+                {/* <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="../src/imports/aboutvideo.mp4" type="video/mp4" />
+        
+      </video> */}
                 <img
-                  src="https://images.unsplash.com/photo-1603481588273-2f908a9a7a1b?w=900&h=680&fit=crop&auto=format&q=85"
+                  src={aboutimage}
                   alt="Programming workstation with dual monitors displaying code"
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover animate-[kenburns_20s_ease-in-out_infinite]"
                 />
                 {/* Dark overlay so text pops */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-transparent" />
 
-                {/* Floating stat cards */}
+                {/* Floating stat cards
                 <div className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm border border-border px-4 py-3">
                   <p
                     className="text-primary font-black leading-none"
                     style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "1.8rem" }}
                   >
-                    3+
+                    1+
                   </p>
                   <p
                     className="text-muted-foreground"
@@ -545,7 +605,7 @@ export default function App() {
                   >
                     YEARS EXP.
                   </p>
-                </div>
+                </div> */}
 
                 <div className="absolute bottom-4 left-4 right-4 bg-background/90 backdrop-blur-sm border border-border px-4 py-3 flex items-center justify-between">
                   <div>
@@ -569,7 +629,7 @@ export default function App() {
                     DC
                   </div>
                 </div>
-              </div>
+              </div></div>
 
               {/* Coursework below image */}
               <div className="mt-5">
@@ -592,6 +652,13 @@ export default function App() {
                 </div>
               </div>
             </div>
+
+            
+
+
+
+
+
           </div>
         </div>
       </section>
@@ -748,9 +815,9 @@ export default function App() {
 
               <div className="space-y-0">
                 {[
-                  { label: "Email", value: "hello@example.dev", href: "mailto:hello@example.dev" },
-                  { label: "LinkedIn", value: "View profile", href: "https://linkedin.com" },
-                  { label: "GitHub", value: "@username", href: "https://github.com" },
+                  { label: "Email", value: "divroopsandhu2@gmail.com", href: "mailto:divroopsandhu2@gmail.com" },
+                  { label: "LinkedIn", value: "View profile", href: "https://www.linkedin.com/in/divroop-sandhu-650382214/" },
+                  { label: "GitHub", value: "@divroopsandhu2-coder", href: "https://github.com/divroopsandhu2-coder" },
                   { label: "Location", value: "Vancouver, BC", href: null, accent: false },
                   { label: "Education", value: "B.Tech CS · Punjab Technical University", href: null, accent: false },
                   { label: "Status", value: "Open to work ✓", href: null, accent: true },
