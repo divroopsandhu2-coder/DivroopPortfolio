@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowUpRight,
   Github,
@@ -18,6 +19,30 @@ import aboutimage from "@/imports/aboutimage.jpg";
 import homeImage from "@/imports/homeimage.jpg";
 
 /* ─────────────────────── DATA */
+function useTypewriter(text: string, speed: number = 80, startDelay: number = 0) {
+  const [displayed, setDisplayed] = useState("");
+
+  useEffect(() => {
+    setDisplayed("");
+    let i = 0;
+    let interval: ReturnType<typeof setInterval>;
+
+    const timeout = setTimeout(() => {
+      interval = setInterval(() => {
+        i++;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) clearInterval(interval);
+      }, speed);
+    }, startDelay);
+
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
+  }, [text, speed, startDelay]);
+
+  return displayed;
+}
 
 const NAV_LINKS = ["About", "Skills", "Experience", "Contact"];
 
@@ -74,9 +99,9 @@ const EXPERIENCE = [
   {
     number: "03",
     company: "Complete Pest Control",
-    role: "Software Developer Intern",
+    role: "Software Developer",
     location: "Surrey, BC",
-    type: "Internship",
+    type: "Contract",
     bullets: [
       "Developed custom web scraping scripts to extract invoice data from a website lacking bulk download functionality. ",
       " Cleaned and organized inconsistent invoice data based on client-defined categories such as Invoice number, description, units etc. using Python and Excel. ",
@@ -156,6 +181,9 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openExp, setOpenExp] = useState("01");
   const cursorRef = useRef(null);
+  const line1 = useTypewriter("Hi, I'm", 60, 0);
+  const line2 = useTypewriter("Divroop Sandhu", 60, 700)
+  
 
   useEffect(() => {
     const move = (e) => {
@@ -196,7 +224,7 @@ export default function App() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
         >
-          {/* DivCode Solution logo mark */}
+          {/* Divcode Solutions logo mark */}
           <div
             className="flex items-center justify-center w-7 h-7 bg-primary"
             style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "0.75rem", fontWeight: 800, color: "var(--primary-foreground)", letterSpacing: "0.02em" }}
@@ -208,13 +236,13 @@ export default function App() {
               className="text-foreground"
               style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "0.9rem", fontWeight: 700, letterSpacing: "0.05em", lineHeight: 1 }}
             >
-              DivCode
+              Divcode
             </span>
             <span
               className="text-primary"
-              style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.14em", lineHeight: 1.4 }}
+              style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", lineHeight: 1.4 }}
             >
-              SOLUTION
+              Solutions
             </span>
           </div>
         </button>
@@ -278,44 +306,38 @@ export default function App() {
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0 bg-background" />
           <div className="hidden md:block absolute right-0 top-0 bottom-0 w-[40%] bg-secondary/30 border-l border-border" />
-          <div
-            className="absolute inset-0 opacity-[0.025]"
-            style={{
-              backgroundImage:
-                "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-              backgroundSize: "56px 56px",
-            }}
-          />
+          <div className="absolute inset-0 opacity-[0.025]" style={{
+              backgroundImage:   "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
+              backgroundSize: "56px 56px", }} />
         </div>
 
         <div className="relative flex-1 flex flex-col justify-center px-6 md:px-12 pt-20 pb-16 max-w-7xl mx-auto w-full">
-          <div
-            className="mb-6 inline-flex items-center gap-2 w-fit border border-border px-3 py-1.5"
-            style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.1em" }}
-          >
+          <div className="mb-6 inline-flex items-center gap-2 w-fit border border-border px-3 py-1.5"
+            style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.1em" }} >
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             <span className="text-primary">OPEN TO WORK — VANCOUVER, BC</span>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-end md:gap-12">
             <div className="flex-1">
-              <h1
-                className="font-black uppercase leading-none mb-2"
-                style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: "clamp(2.2rem, 6vw, 5rem)",
-                  lineHeight: 0.9,
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                Hi, I'm
-              <br />
-            <span style={{ color: "var(--primary)" }}>Divroop Sandhu</span>
-           <br />
-             <span style={{ fontSize: "0.25em", fontWeight: 500, color: "#a0a0a0", letterSpacing: "0.1em", }}>
-              FULL STACK DEVELOPER
-           </span>
-            </h1>
+        
+          <h1
+      className="font-black uppercase leading-none mb-2"
+      style={{
+        fontFamily: "'Barlow Condensed', sans-serif",
+        fontSize: "clamp(2.2rem, 6vw, 5rem)",
+        lineHeight: 0.9,
+        letterSpacing: "-0.01em",
+      }}
+    >
+      {line1}
+      <br />
+      <span style={{ color: "var(--primary)" }}>{line2}</span>
+      <br />
+      <span style={{ fontSize: "0.25em", fontWeight: 500, color: "#a0a0a0", letterSpacing: "0.1em" }}>
+        FULL STACK DEVELOPER
+      </span>
+    </h1>
 
               <p className="text-foreground/50 mt-5 text-sm leading-relaxed max-w-md">
                I build modern, responsive web applications that combine intuitive user experiences with reliable backend systems. Passionate about solving real-world problems through technology, I enjoy turning ideas into scalable digital solutions.
@@ -323,22 +345,27 @@ export default function App() {
 Explore my projects, experience, and the technologies I use to create impactful web experiences.
               </p>
 
-              <div className="mt-6 flex items-center gap-4 flex-wrap">
-                <button
-                  onClick={() => scrollTo("Contact")}
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 font-semibold hover:opacity-90 transition-opacity"
-                  style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "1rem", letterSpacing: "0.05em" }}
-                >
-                  Get in touch <ArrowUpRight size={15} />
-                </button>
-                <button
-                  onClick={() => scrollTo("Experience")}
-                  className="inline-flex items-center gap-2 border border-border text-foreground/70 px-5 py-2.5 hover:border-foreground/40 transition-colors"
-                  style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.72rem", letterSpacing: "0.06em" }}
-                >
-                  View work
-                </button>
-              </div>
+            <div className="mt-6 flex items-center gap-4 flex-wrap">
+  <button
+    onClick={() => scrollTo("Contact")}
+    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 font-semibold
+               transition-all duration-200 ease-out
+               hover:-translate-y-1 hover:scale-105 hover:shadow-lg hover:bg-primary/80"
+    style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "1rem", letterSpacing: "0.05em" }}
+  >
+    Get in touch <ArrowUpRight size={15} />
+  </button>
+
+  <button
+    onClick={() => scrollTo("Experience")}
+    className="inline-flex items-center gap-2 border border-border text-foreground/70 px-5 py-2.5
+               transition-all duration-300 ease-out
+               hover:-translate-y-1 hover:scale-105 hover:border-primary hover:text-primary"
+    style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.72rem", letterSpacing: "0.06em" }}
+  >
+    View work
+  </button>
+</div>
 
             </div>
 
@@ -434,13 +461,41 @@ Explore my projects, experience, and the technologies I use to create impactful 
         </div>
       </section>
 
-      {/* ── ABOUT */}
-      <section id="about" className="py-24 md:py-32 px-6 md:px-12 border-t border-border overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <SectionLabel index="00" title="About DivCode Solution" />
+    
+       {/* ── ABOUT */}
+      <section id="about" className="relative py-24 md:py-32 px-6 md:px-12 border-t border-border overflow-hidden">
+
+        {/* Ambient animated background — sits behind everything in this section */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div
+            className="absolute -left-32 -top-40 w-[700px] h-[700px] rounded-full blur-3xl opacity-20 animate-[drift-a_22s_ease-in-out_infinite]"
+            style={{ backgroundColor: "var(--primary)" }}
+          />
+          <div
+            className="absolute -right-24 bottom-[-200px] w-[560px] h-[560px] rounded-full blur-3xl opacity-[0.12] animate-[drift-b_26s_ease-in-out_infinite]"
+            style={{ backgroundColor: "var(--primary)" }}
+          />
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                "linear-gradient(var(--primary) 1px, transparent 1px), linear-gradient(90deg, var(--primary) 1px, transparent 1px)",
+              backgroundSize: "44px 44px",
+              maskImage:
+                "radial-gradient(ellipse 65% 55% at 30% 10%, rgba(0,0,0,0.9), transparent 75%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 65% 55% at 30% 10%, rgba(0,0,0,0.9), transparent 75%)",
+            }}
+          />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto">
+          <div className="animate-[rise-in_0.7s_ease-out_forwards] opacity-0">
+            <SectionLabel index="00" title="About DivCode Solution" />
+          </div>
 
           {/* Headline */}
-          <div className="mt-12 mb-14">
+          <div className="mt-12 mb-14 animate-[rise-in_0.7s_ease-out_forwards] opacity-0" style={{ animationDelay: "0.1s" }}>
             <h2
               className="font-black uppercase leading-none"
               style={{
@@ -462,7 +517,10 @@ Explore my projects, experience, and the technologies I use to create impactful 
             <div className="flex flex-col gap-8">
 
               {/* Owner badge */}
-              <div className="inline-flex items-center gap-3 border border-border px-4 py-3 w-fit">
+              <div
+                className="inline-flex items-center gap-3 border border-border px-4 py-3 w-fit animate-[rise-in_0.6s_ease-out_forwards] opacity-0"
+                style={{ animationDelay: "0.2s" }}
+              >
                 <div
                   className="flex items-center justify-center w-8 h-8 bg-primary shrink-0"
                   style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "0.8rem", fontWeight: 800, color: "var(--primary-foreground)" }}
@@ -486,7 +544,10 @@ Explore my projects, experience, and the technologies I use to create impactful 
               </div>
 
               {/* Pitch paragraphs */}
-              <div className="space-y-4 text-foreground/65 text-sm leading-relaxed">
+              <div
+                className="space-y-4 text-foreground/65 text-sm leading-relaxed animate-[rise-in_0.6s_ease-out_forwards] opacity-0"
+                style={{ animationDelay: "0.3s" }}
+              >
                 <p>
                   DivCode Solution is a solo software studio run by a B.Tech Computer Science graduate. I work directly with clients — no account managers, no middlemen — so your vision goes straight into the code.
                 </p>
@@ -505,12 +566,25 @@ Explore my projects, experience, and the technologies I use to create impactful 
                   { icon: "🔁", title: "Business Automation", desc: "Power Apps & Power Automate workflows that save hours every week." },
                   { icon: "🗄️", title: "Database Design", desc: "Clean schemas, SQL queries, and data migrations done right." },
                   { icon: "🤝", title: "Direct Collaboration", desc: "You talk to the developer. Fast responses, transparent progress." },
-                ].map(({ icon, title, desc }) => (
+                ].map(({ icon, title, desc }, i) => (
                   <div
                     key={title}
-                    className="p-4 border border-border hover:border-primary/40 transition-colors group cursor-default"
+                    onMouseMove={(e) => {
+                      const r = e.currentTarget.getBoundingClientRect();
+                      e.currentTarget.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+                      e.currentTarget.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+                    }}
+                    className="relative p-4 border border-border hover:border-primary/40 transition-colors group cursor-default overflow-hidden animate-[rise-in_0.5s_ease-out_forwards] opacity-0"
+                    style={{ animationDelay: `${0.4 + i * 0.07}s` }}
                   >
-                    <div className="flex items-center gap-2 mb-2">
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{
+                        background:
+                          "radial-gradient(160px circle at var(--mx,50%) var(--my,0%), color-mix(in srgb, var(--primary) 14%, transparent), transparent 70%)",
+                      }}
+                    />
+                    <div className="relative flex items-center gap-2 mb-2">
                       <span className="text-base">{icon}</span>
                       <p
                         className="text-foreground font-semibold text-sm group-hover:text-primary transition-colors"
@@ -519,13 +593,16 @@ Explore my projects, experience, and the technologies I use to create impactful 
                         {title}
                       </p>
                     </div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{desc}</p>
+                    <p className="relative text-muted-foreground text-xs leading-relaxed">{desc}</p>
                   </div>
                 ))}
               </div>
 
               {/* Why hire me strip */}
-              <div className="flex flex-wrap gap-3">
+              <div
+                className="flex flex-wrap gap-3 animate-[rise-in_0.6s_ease-out_forwards] opacity-0"
+                style={{ animationDelay: "0.75s" }}
+              >
                 {[
                   "On-time delivery",
                   "Clean, maintainable code",
@@ -592,6 +669,15 @@ Explore my projects, experience, and the technologies I use to create impactful 
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-transparent" />
 
+                {/* Slow light sweep across the image, like a terminal scanline */}
+                <div
+                  className="absolute left-0 right-0 h-24 opacity-60 pointer-events-none animate-[scan-sweep_7s_ease-in-out_infinite]"
+                  style={{
+                    background: "linear-gradient(180deg, color-mix(in srgb, var(--primary) 22%, transparent), transparent 75%)",
+                    mixBlendMode: "screen",
+                  }}
+                />
+
                 {/* Floating stat cards
                 <div className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm border border-border px-4 py-3">
                   <p
@@ -654,143 +740,158 @@ Explore my projects, experience, and the technologies I use to create impactful 
               </div>
             </div>
 
-            
-
-
-
-
-
           </div>
         </div>
       </section>
+
 
       {/* ── SKILLS */}
-      <section id="skills" className="py-24 md:py-32 px-6 md:px-12 bg-secondary/20 border-y border-border">
-        <div className="max-w-7xl mx-auto">
-          <SectionLabel index="01" title="Skills" />
+ <section id="skills" className="py-24 md:py-32 px-6 md:px-12 bg-secondary/20 border-y border-border">
+  <div className="max-w-7xl mx-auto">
+    <SectionLabel index="01" title="Skills" />
 
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-border divide-y lg:divide-y-0 divide-border">
-            {SKILLS.map(({ category, items }, ci) => (
-              <div
-                key={category}
-                className="p-6 md:p-8"
-                style={{ borderRight: ci < SKILLS.length - 1 ? "1px solid var(--border)" : undefined }}
+    <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-border divide-y lg:divide-y-0 divide-border">
+      {SKILLS.map(({ category, items }, ci) => (
+        <motion.div
+          key={category}
+          className="p-6 md:p-8"
+          style={{ borderRight: ci < SKILLS.length - 1 ? "1px solid var(--border)" : undefined }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.9, delay: ci * 0.25, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p
+            className="text-primary mb-5 uppercase"
+            style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.14em" }}
+          >
+            {category}
+          </p>
+          <ul className="space-y-3">
+            {items.map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-2.5 text-foreground/75 text-sm group cursor-default hover:text-foreground transition-colors"
               >
-                <p
-                  className="text-primary mb-5 uppercase"
-                  style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.14em" }}
-                >
-                  {category}
-                </p>
-                <ul className="space-y-3">
-                  {items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-2.5 text-foreground/75 text-sm group cursor-default hover:text-foreground transition-colors"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-primary shrink-0 group-hover:scale-150 transition-transform duration-150" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <span className="w-1 h-1 rounded-full bg-primary shrink-0 group-hover:scale-150 transition-transform duration-150" />
+                {item}
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* ── EXPERIENCE */}
-      <section id="experience" className="py-24 md:py-32 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          <SectionLabel index="02" title="Experience" />
+   <section id="experience" className="py-24 md:py-32 px-6 md:px-12">
+  <div className="max-w-7xl mx-auto">
+    <SectionLabel index="02" title="Experience" />
 
-          <div className="mt-14 space-y-0">
-            {EXPERIENCE.map((exp) => {
-              const isOpen = openExp === exp.number;
-              return (
-                <div key={exp.number} className="border-b border-border">
-                  <button
-                    className="w-full flex items-start md:items-center gap-4 py-6 text-left group"
-                    onClick={() => setOpenExp(isOpen ? null : exp.number)}
-                  >
-                    <span
-                      className="text-primary shrink-0 mt-0.5 md:mt-0"
-                      style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.08em" }}
-                    >
-                      {exp.number}
-                    </span>
-                    <div className="flex-1 flex flex-col md:flex-row md:items-center gap-1 md:gap-8">
-                      <h3
-                        className="font-black uppercase leading-none group-hover:text-primary transition-colors"
-                        style={{
-                          fontFamily: "'Barlow Condensed', sans-serif",
-                          fontSize: "clamp(1.4rem, 3vw, 2rem)",
-                          lineHeight: 1,
-                        }}
-                      >
-                        {exp.company}
-                      </h3>
-                      <div className="flex items-center gap-3">
-                        <span
-                          className="text-foreground/50 text-xs"
-                          style={{ fontFamily: "'Geist Mono', monospace", letterSpacing: "0.04em" }}
-                        >
-                          {exp.role}
-                        </span>
-                        <span
-                          className="px-2 py-0.5 border border-border text-muted-foreground"
-                          style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.06em" }}
-                        >
-                          {exp.type}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4 shrink-0 ml-auto">
-                      <div className="hidden md:flex items-center gap-1 text-muted-foreground">
-                        <MapPin size={11} />
-                        <span style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.05em" }}>
-                          {exp.location}
-                        </span>
-                      </div>
-                      <span
-                        className="text-muted-foreground text-xl leading-none transition-transform duration-200"
-                        style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)", display: "inline-block" }}
-                      >
-                        +
-                      </span>
-                    </div>
-                  </button>
+    <div className="mt-14">
+      {EXPERIENCE.map((exp, ci) => {
+        const isOpen = openExp === exp.number;
+        return (
+          <motion.div
+            key={exp.number}
+            className="border-b border-border"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: ci * 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <button
+              className="w-full flex items-center gap-4 py-6 text-left group"
+              onClick={() => setOpenExp(isOpen ? null : exp.number)}
+            >
+              <span
+                className="shrink-0 transition-all duration-200"
+                style={{
+                  fontFamily: "'Geist Mono', monospace",
+                  fontWeight: 500,
+                  fontSize: "2.75rem",
+                  lineHeight: 1,
+                  width: "4rem",
+                  color: "transparent",
+                  WebkitTextStroke: isOpen ? "1px var(--primary)" : "1px var(--border)",
+                }}
+              >
+                {exp.number}
+              </span>
 
-                  {isOpen && (
-                    <div className="pb-8 pl-10 pr-4 grid grid-cols-1 md:grid-cols-12 gap-6">
-                      <ul className="md:col-span-8 space-y-3">
-                        {exp.bullets.map((b, i) => (
-                          <li key={i} className="flex items-start gap-3 text-foreground/65 text-sm leading-relaxed">
-                            <span className="w-1 h-1 rounded-full bg-primary shrink-0 mt-2" />
-                            {b}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="md:col-span-4 flex flex-wrap gap-1.5 content-start">
-                        {exp.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2.5 py-1 border border-border text-muted-foreground"
-                            style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.05em" }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+              <div className="flex-1 min-w-0 flex flex-col gap-1">
+                <h3
+                  className="font-black uppercase leading-none group-hover:text-primary transition-colors"
+                  style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "clamp(1.4rem, 3vw, 2rem)" }}
+                >
+                  {exp.company}
+                </h3>
+                <div className="flex items-center gap-2 text-muted-foreground text-xs">
+                  <span style={{ fontFamily: "'Geist Mono', monospace" }}>
+                    {exp.role} — {exp.type}
+                  </span>
+                  <span>·</span>
+                  <span className="flex items-center gap-1" style={{ fontFamily: "'Geist Mono', monospace" }}>
+                    <MapPin size={11} />
+                    {exp.location}
+                  </span>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                <p
+                  className="text-foreground/40 text-xs transition-opacity duration-150"
+                  style={{ opacity: isOpen ? 0 : 1 }}
+                >
+                  {exp.summary}
+                </p>
+              </div>
 
+              <span
+                className="text-muted-foreground text-lg shrink-0 transition-transform duration-200"
+                style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
+              >
+                →
+              </span>
+            </button>
+
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ overflow: "hidden" }}
+                >
+                  <div className="pb-6 pl-[4.5rem] pr-4 flex flex-col gap-4">
+                    <ul className="space-y-2">
+                      {exp.bullets.map((b, i) => (
+                        <li key={i} className="flex items-start gap-2 text-foreground/65 text-sm leading-relaxed">
+                          <span className="w-1 h-1 rounded-full bg-primary shrink-0 mt-2" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                    <div>
+                      <p
+                        className="text-muted-foreground uppercase mb-1"
+                        style={{ fontFamily: "'Geist Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.12em" }}
+                      >
+                        stack
+                      </p>
+                      <p className="text-foreground/60 text-xs" style={{ fontFamily: "'Geist Mono', monospace" }}>
+                        {exp.tags.join("  ·  ")}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        );
+      })}
+    </div>
+  </div>
+</section>
       {/* ── CONTACT */}
       <section id="contact" className="py-24 md:py-32 px-6 md:px-12 bg-secondary/20 border-t border-border">
         <div className="max-w-7xl mx-auto">
@@ -816,7 +917,7 @@ Explore my projects, experience, and the technologies I use to create impactful 
 
               <div className="space-y-0">
                 {[
-                  { label: "Email", value: "divroopsandhu2@gmail.com", href: "mailto:divroopsandhu2@gmail.com" },
+                  { label: "Email", value: "divroopsandhu2@gmail.com", href: "divroopsandhu2@gmail.com" },
                   { label: "LinkedIn", value: "View profile", href: "https://www.linkedin.com/in/divroop-sandhu-650382214/" },
                   { label: "GitHub", value: "@divroopsandhu2-coder", href: "https://github.com/divroopsandhu2-coder" },
                   { label: "Location", value: "Vancouver, BC", href: null, accent: false },
