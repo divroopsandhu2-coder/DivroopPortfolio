@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import {
   ArrowUpRight,
   Github,
@@ -907,19 +908,44 @@ function ContactForm() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setTouched({ name: true, email: true, subject: true, message: true });
-    const errs = validateForm(form);
-    setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
+  e.preventDefault();
 
+  setTouched({
+    name: true,
+    email: true,
+    subject: true,
+    message: true,
+  });
+
+  const errs = validateForm(form);
+  setErrors(errs);
+
+  if (Object.keys(errs).length > 0) return;
+
+  try {
     setStatus("submitting");
-    await new Promise((res) => setTimeout(res, 1400));
+
+    await emailjs.send(
+      "service_0smk93i", //service id
+      "template_d7a4chp",  //template id
+      {
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+      },
+      "TCPL3SjKYxbFYBoIZ"  //public key
+    );
+
     setStatus("success");
     setForm(empty);
     setTouched({});
     setErrors({});
-  };
+  } catch (err) {
+    console.error(err);
+    setStatus("error");
+  }
+};
 
   if (status === "success") {
     return (
