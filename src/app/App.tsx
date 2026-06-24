@@ -61,7 +61,7 @@ const SKILLS = [
   },
   {
     category: "Tools & OS",
-    items: ["Git / GitHub", "Raspberry Pi", "IoT / DIBee", "Windows", "Linux"],
+    items: ["Git / GitHub", "Raspberry Pi", "IoT / Debian", "Windows", "Linux"],
   },
 ];
 
@@ -549,7 +549,7 @@ Explore my projects, experience, and the technologies I use to create impactful 
                 style={{ animationDelay: "0.3s" }}
               >
                 <p>
-                  DivCode Solution is a solo software studio run by a B.Tech Computer Science graduate. I work directly with clients — no account managers, no middlemen — so your vision goes straight into the code.
+                  Divcode Solutions is a solo software studio run by a B.Tech Computer Science graduate. I work directly with clients — no account managers, no middlemen — so your vision goes straight into the code.
                 </p>
                 <p>
                   Whether you need a client-facing React web app, a REST API backend, a Power Apps business automation, or a database built from scratch, I handle the full delivery: architecture, build, testing, and launch.
@@ -700,7 +700,7 @@ Explore my projects, experience, and the technologies I use to create impactful 
                       className="text-foreground font-semibold"
                       style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "1.1rem", letterSpacing: "0.04em" }}
                     >
-                      DivCode Solution
+                      Divcode Solutions
                     </p>
                     <p
                       className="text-muted-foreground"
